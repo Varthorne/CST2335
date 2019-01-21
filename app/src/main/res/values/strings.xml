@@ -2,4 +2,9 @@
     <string name="app_name">Lab 1</string>
     <string name="hello_message">Hello World!</string>
     <string name="ButtonText">I\'m a button</string>
+    <string name="Lab2Title">Here are my widgets:</string>
+    <string name="Lab2Button">Button</string>
+    <string name="Lab2CheckBox">Check this out!</string>
+    <string name="Lab2Switch">Switch on / off</string>
+    <string name="Lab2Hint">Type your answer in here</string>
 </resources>

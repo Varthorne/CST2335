@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/profileText1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Lab3_profile_text1_profile"
+        />
+
+    <TextView
+        android:id="@+id/profileText2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Lab3_profile_text2_name"
+        />
+
+    <EditText
+        android:id="@+id/profileEdit1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/Lab3_profile_edit1_name"
+        />
+
+    <TextView
+        android:id="@+id/profileText3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Lab3_profile_text3_email"
+        />
+
+    <EditText
+        android:id="@+id/profileEdit2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/Lab3_profile_edit2_email"
+        />
+
+    <EditText
+        android:id="@+id/profileText4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/Lab3_profile_text4_picture"
+        />
+
+    <ImageButton
+        android:id="@+id/profilePictureButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@android:drawable/picture_frame"
+        />
+
+    <TextView
+        android:id="@+id/profileText5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Lab4_profile_text5_takePicture"
+        />
+
+
+
+</LinearLayout>

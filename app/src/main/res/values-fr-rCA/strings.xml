@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Lab 1</string>
+    <string name="app_name">Lab 3</string>
     <string name="hello_message">Bonjour!</string>
     <string name="ButtonText">Je suis un bouton!</string>
+
+
+    <!-- Lab 3 strings -->
+
+        <!-- Login page -->
+    <string name="Lab3_enter_email">Tapez votre adresse courriel: </string>
+    <string name="Lab3_type_email">Tapez votre courriel ici</string>
+    <string name="Lab3_enter_password">Tapez votre mot de passe: </string>
+    <string name="Lab3_login_button">Connexion</string>
+
+    <!-- Profile Page -->
+    <string name="Lab3_profile_text1_profile">Votre profil</string>
+    <string name="Lab3_profile_text2_name">Votre nom:</string>
+    <string name="Lab3_profile_edit1_name">Entrez votre nom</string>
+    <string name="Lab3_profile_text3_email">Votre adresse courriel:</string>
+    <string name="Lab3_profile_edit2_email">Entrez votre courriel</string>
+    <string name="Lab3_profile_text4_picture">Votre photo:</string>
+    <string name="Lab4_profile_text5_takePicture">Appuyez sur le bouton ci-dessus pour prendre une photo</string>
+
 </resources>

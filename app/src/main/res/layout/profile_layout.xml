@@ -40,11 +40,11 @@
         android:hint="@string/Lab3_profile_edit2_email"
         />
 
-    <EditText
+    <TextView
         android:id="@+id/profileText4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/Lab3_profile_text4_picture"
+        android:text="@string/Lab3_profile_text4_picture"
         />
 
     <ImageButton

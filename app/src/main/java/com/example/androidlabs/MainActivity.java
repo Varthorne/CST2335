@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
         emailField = findViewById(R.id.EditTextEmail);
         sp = getSharedPreferences("Lab3Prefs", Context.MODE_PRIVATE);
-        String emailString = sp.getString("userEmail", "Email");
+        String emailString = sp.getString("userEmail", "");
 
         emailField.setText(emailString);
 

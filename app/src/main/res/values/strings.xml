@@ -1,23 +1,31 @@
 <resources>
-    <string name="app_name">Lab 3</string>
+    <string name="app_name">Lab 4</string>
     <string name="hello_message">Hello World!</string>
     <string name="ButtonText">I\'m a button</string>
 
     <!-- Lab 3 strings -->
 
         <!-- Login page -->
-    <string name="Lab3_enter_email">Enter your email address: </string>
-    <string name="Lab3_type_email">Type email here</string>
-    <string name="Lab3_enter_password">Type your password: </string>
-    <string name="Lab3_login_button">Login</string>
+        <string name="Lab3_enter_email">Enter your email address: </string>
+        <string name="Lab3_type_email">Type email here</string>
+        <string name="Lab3_enter_password">Type your password: </string>
+        <string name="Lab3_login_button">Login</string>
 
         <!-- Profile Page -->
-    <string name="Lab3_profile_text1_profile">Your profile</string>
-    <string name="Lab3_profile_text2_name">Your name:</string>
-    <string name="Lab3_profile_edit1_name">Enter your name</string>
-    <string name="Lab3_profile_text3_email">Your email:</string>
-    <string name="Lab3_profile_edit2_email">Enter your email</string>
-    <string name="Lab3_profile_text4_picture">Your picture:</string>
-    <string name="Lab4_profile_text5_takePicture">Click the button above to take a picture</string>
+        <string name="Lab3_profile_text1_profile">Your profile</string>
+        <string name="Lab3_profile_text2_name">Your name:</string>
+        <string name="Lab3_profile_edit1_name">Enter your name</string>
+        <string name="Lab3_profile_text3_email">Your email:</string>
+        <string name="Lab3_profile_edit2_email">Enter your email</string>
+        <string name="Lab3_profile_text4_picture">Your picture:</string>
+        <string name="Lab3_profile_text5_takePicture">Click the button above to take a picture</string>
+        <string name="Lab4_profile_chat_button">Go to chat</string>
+
+    <!-- Lab 4 strings -->
+
+        <!-- Chat Room Page -->
+        <string name="Lab4_chatSendButton">SEND</string>
+        <string name="Lab4_chatEditText">Type here</string>
+        <string name="Lab4_chatReceiveButton">RECEIVE</string>
 
 </resources>

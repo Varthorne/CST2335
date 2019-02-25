@@ -58,9 +58,15 @@
         android:id="@+id/profileText5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/Lab4_profile_text5_takePicture"
+        android:text="@string/Lab3_profile_text5_takePicture"
         />
 
+    <Button
+        android:id="@+id/chatButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Lab4_profile_chat_button"
+        />
 
 
 </LinearLayout>

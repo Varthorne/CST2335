@@ -8,12 +8,14 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
 public class ProfileActivity extends AppCompatActivity {
 
     private ImageButton imageButton;
+    private Button chatButton;
     public static final String ACTIVITY_NAME = "ProfileActivity";
 
     @Override
@@ -33,6 +35,13 @@ public class ProfileActivity extends AppCompatActivity {
         imageButton.setOnClickListener( e -> {
 
             dispatchTakePictureIntent();
+        });
+
+        chatButton = findViewById(R.id.chatButton);
+        chatButton.setOnClickListener(e -> {
+            Intent chatRoomPage = new Intent(ProfileActivity.this, ChatActivity.class);
+
+            startActivity(chatRoomPage);
         });
 
         Log.e(ACTIVITY_NAME, "In function:" + "onCreate");

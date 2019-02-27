@@ -44,7 +44,7 @@ public class ChatActivity extends AppCompatActivity {
             EditText chatEditText = findViewById(R.id.chatEditText);
 
             if(!(chatEditText.getText().toString().equals(""))) {
-                messages.add(new Message(chatEditText.getText().toString(), true));
+                messages.add(new Message(chatEditText.getText().toString(), true, 0));
                 adapter.notifyDataSetChanged();
                 chatEditText.setText("");
             }
@@ -57,7 +57,7 @@ public class ChatActivity extends AppCompatActivity {
             EditText chatEditText = findViewById(R.id.chatEditText);
 
             if(!(chatEditText.getText().toString().equals(""))) {
-                messages.add(new Message(chatEditText.getText().toString(), false));
+                messages.add(new Message(chatEditText.getText().toString(), false, 0));
                 adapter.notifyDataSetChanged();
                 chatEditText.setText("");
             }

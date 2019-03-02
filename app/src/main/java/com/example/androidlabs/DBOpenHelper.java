@@ -11,10 +11,9 @@ public class DBOpenHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "DatabaseFile";
     public static final int VERSION_NUMBER = 1;
     public static final String TABLE_NAME = "Messages";
-    public static final String COL_ID = "id";
+    public static final String COL_ID = "_id";
     public static final String COL_MESSAGE = "message";
     public static final String COL_BOOLEAN = "wasSent";
-
 
     public DBOpenHelper(Activity context){
         super(context, DATABASE_NAME, null, VERSION_NUMBER);
@@ -25,10 +24,10 @@ public class DBOpenHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        db.execSQL("CREATE TABLE " + TABLE_NAME +"( " +
-                COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                COL_MESSAGE + "TEXT " +
-                COL_BOOLEAN  + "flag INTEGER DEFAULT 0 )");
+        db.execSQL("CREATE TABLE " + TABLE_NAME +" ("
+               + COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+               + COL_MESSAGE + " TEXT,"
+                + COL_BOOLEAN + " INTEGER DEFAULT 0)");
     }
 
 
@@ -40,6 +39,18 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 
         db.execSQL("DROP TABLE IF EXISTS "+ TABLE_NAME);
 
+        onCreate(db);
+    }
+
+    @Override
+    public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion)
+    {
+        Log.i("Database downgrade", "Old version:" + oldVersion + " newVersion:"+newVersion);
+
+        //Delete the old table:
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+
+        //Create a new table:
         onCreate(db);
     }
 }

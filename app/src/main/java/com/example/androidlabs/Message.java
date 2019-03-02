@@ -4,18 +4,23 @@ public class Message {
 
     String message;
     boolean wasSent;
-    long dbID;
+    long id;
 
     public Message(){
 
-        this(new String(), false, 0);
+        this(new String(), false, -1);
     }
 
-    public Message(String message, boolean wasSent, long dbID){
+    public Message(String message, boolean wasSent){
+
+        this(message, wasSent, -1);
+    }
+
+    public Message(String message, boolean wasSent, long id){
 
         this.message = message;
         this.wasSent = wasSent;
-        this.dbID = dbID;
+        this.id = id;
     }
 
     public String getMessage(){
@@ -26,8 +31,13 @@ public class Message {
         return wasSent;
     }
 
-    public long getDbID(){
+    public long getId(){
 
-        return dbID;
+        return id;
     }
+
+    public void setId(long id){
+        this.id = id;
+    }
+
 }

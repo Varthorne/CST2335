@@ -1,18 +1,15 @@
 package com.example.androidlabs;
 
+import android.content.ContentValues;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -30,12 +27,41 @@ public class ChatActivity extends AppCompatActivity {
 
         /* Initialize objects */
         messages = new ArrayList<>();
+
         chatWindow = findViewById(R.id.chatListView);
-        //SwipeRefreshLayout refresher = findViewById(R.id.chatRefresher);
-        ChatAdapter adapter = new ChatAdapter(messages);
+
+
+        SwipeRefreshLayout refresher = findViewById(R.id.chatRefresher);
+
         Button sendButton = findViewById(R.id.chatSendButton);
         Button receiveButton = findViewById(R.id.chatReceiveButton);
 
+
+        /* Retrieve database and load ListView messages */
+        DBOpenHelper dbOpener = new DBOpenHelper(this);
+        SQLiteDatabase db = dbOpener.getWritableDatabase();
+
+        String[] columns = {DBOpenHelper.COL_ID, DBOpenHelper.COL_MESSAGE, DBOpenHelper.COL_BOOLEAN};
+        Cursor results = db.query(false, DBOpenHelper.TABLE_NAME, columns, null, null, null, null, null, null);
+
+        int idIndex = results.getColumnIndex(DBOpenHelper.COL_ID);
+        int messageIndex = results.getColumnIndex(DBOpenHelper.COL_MESSAGE);
+        int booleanIndex = results.getColumnIndex(DBOpenHelper.COL_BOOLEAN);
+
+        while(results.moveToNext()){
+
+            long id = results.getLong(idIndex);
+            String message = results.getString(messageIndex);
+            boolean wasSent = true;
+
+            if(results.getInt(booleanIndex) == 0)
+                wasSent = false;
+
+            messages.add(new Message(message, wasSent, id));
+        }
+
+
+        ChatAdapter adapter = new ChatAdapter(messages, this);
         chatWindow.setAdapter(adapter);
 
         /* Add Listeners */
@@ -44,7 +70,11 @@ public class ChatActivity extends AppCompatActivity {
             EditText chatEditText = findViewById(R.id.chatEditText);
 
             if(!(chatEditText.getText().toString().equals(""))) {
-                messages.add(new Message(chatEditText.getText().toString(), true, 0));
+
+                Message message = new Message(chatEditText.getText().toString(), true);
+
+                createMessage(message, db);
+
                 adapter.notifyDataSetChanged();
                 chatEditText.setText("");
             }
@@ -57,68 +87,42 @@ public class ChatActivity extends AppCompatActivity {
             EditText chatEditText = findViewById(R.id.chatEditText);
 
             if(!(chatEditText.getText().toString().equals(""))) {
-                messages.add(new Message(chatEditText.getText().toString(), false, 0));
+
+                Message message = new Message(chatEditText.getText().toString(), false);
+
+                createMessage(message, db);
+
                 adapter.notifyDataSetChanged();
                 chatEditText.setText("");
             }
         });
-        /*
+
         refresher.setOnRefreshListener(() -> {
 
             adapter.notifyDataSetChanged();
             refresher.setRefreshing(false);
         });
-        */
+
     }
 
+    private void createMessage(Message message, SQLiteDatabase db){
 
-    protected class ChatAdapter extends BaseAdapter {
+        ContentValues values = new ContentValues();
+        values.put(DBOpenHelper.COL_MESSAGE, message.getMessage());
 
-        private ArrayList<Message> messages;
+        if(message.wasSent() == true)
+            values.put(DBOpenHelper.COL_BOOLEAN, 1);
+        else
+            values.put(DBOpenHelper.COL_BOOLEAN, 0);
 
-        protected ChatAdapter(ArrayList array){
-            this.messages = array;
-        }
+        long newId = db.insert(DBOpenHelper.TABLE_NAME, null, values);
+        message.setId(newId);
 
-        @Override
-        public int getCount() {
-            return messages.size();
-        }
+        messages.add(message);
+    }
 
-        @Override
-        public Object getItem(int position) {
+    private void printCursor(Cursor cursor){
 
-            return messages.get(position);
-        }
-
-        @Override //Not currently in use
-        public long getItemId(int position) {
-            return position;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-
-            LayoutInflater inflater = getLayoutInflater();
-
-            String message = messages.get(position).getMessage();
-            boolean wasSent = messages.get(position).wasSent();
-            View newView;
-
-            if(wasSent) {
-                newView = inflater.inflate(R.layout.send_layout, parent, false);
-            } else {
-                newView = inflater.inflate(R.layout.receive_layout, parent, false);
-            }
-
-            RelativeLayout layout = newView.findViewById(R.id.layout);
-
-            TextView text = (TextView) layout.getChildAt(1);
-
-            text.setText(message);
-
-            return layout;
-        }
     }
 
 }

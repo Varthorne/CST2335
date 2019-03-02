@@ -9,7 +9,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 
 
     public static final String DATABASE_NAME = "DatabaseFile";
-    public static final int VERSION_NUMBER = 1;
+    public static final int VERSION_NUMBER = 2;
     public static final String TABLE_NAME = "Messages";
     public static final String COL_ID = "_id";
     public static final String COL_MESSAGE = "message";

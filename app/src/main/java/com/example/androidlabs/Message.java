@@ -2,9 +2,9 @@ package com.example.androidlabs;
 
 public class Message {
 
-    String message;
-    boolean wasSent;
-    long id;
+    private String message;
+    private boolean wasSent;
+    private long id;
 
     public Message(){
 

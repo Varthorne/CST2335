@@ -43,12 +43,14 @@ public class ChatActivity extends AppCompatActivity {
 
         String[] columns = {DBOpenHelper.COL_ID, DBOpenHelper.COL_MESSAGE, DBOpenHelper.COL_BOOLEAN};
         Cursor results = db.query(false, DBOpenHelper.TABLE_NAME, columns, null, null, null, null, null, null);
+        printCursor(results );
+        results.moveToFirst();
 
         int idIndex = results.getColumnIndex(DBOpenHelper.COL_ID);
         int messageIndex = results.getColumnIndex(DBOpenHelper.COL_MESSAGE);
         int booleanIndex = results.getColumnIndex(DBOpenHelper.COL_BOOLEAN);
 
-        while(results.moveToNext()){
+        do {
 
             long id = results.getLong(idIndex);
             String message = results.getString(messageIndex);
@@ -58,7 +60,7 @@ public class ChatActivity extends AppCompatActivity {
                 wasSent = false;
 
             messages.add(new Message(message, wasSent, id));
-        }
+        } while(results.moveToNext());
 
 
         ChatAdapter adapter = new ChatAdapter(messages, this);
@@ -123,6 +125,33 @@ public class ChatActivity extends AppCompatActivity {
 
     private void printCursor(Cursor cursor){
 
+        String[] columns = cursor.getColumnNames();
+        int numColumns = columns.length;
+
+        Log.e("CursorDebugStart", "\t*************************** Start Cursor Debug ***************************");
+        Log.e("DB_Version", "\t\t|DB Version number: "+ DBOpenHelper.VERSION_NUMBER);
+        Log.e("Column_Number", "\t|Column count: "+ cursor.getColumnCount());
+
+         for(int i = 0; i < numColumns; i++){
+           Log.e("Column"+ (i+1), "\t\t\t|Column "+ (i+1) +columns[i]);
+        }
+
+        Log.e("Result_Count", "\t\t|Result count: "+ cursor.getCount());
+
+       int i = 1;
+       Message message = null;
+
+       while(cursor.moveToNext()){
+
+           if(cursor.getInt(1) == 0)
+            message = new Message(cursor.getString(1), false, cursor.getLong(0));
+           else if(cursor.getInt(1) == 1)
+               message = new Message(cursor.getString(1), true, cursor.getLong(0));
+
+           Log.e("Result "+i++, "\t\t\t|Result "+ (i+1)+ ": Id = "+ message.getId() + " | wasSent = " + message.wasSent() + " | Message = " + message.getMessage());
+       }
+
+        Log.e("CursorDebugEnd", "\t*************************** End Cursor Debug ***************************");
     }
 
 }

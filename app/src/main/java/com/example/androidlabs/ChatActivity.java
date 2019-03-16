@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,6 +25,8 @@ public class ChatActivity extends AppCompatActivity {
         /* Standard method calls */
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chat_room_layout);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         /* Initialize objects */
         messages = new ArrayList<>();
@@ -43,7 +46,7 @@ public class ChatActivity extends AppCompatActivity {
 
         String[] columns = {DBOpenHelper.COL_ID, DBOpenHelper.COL_MESSAGE, DBOpenHelper.COL_BOOLEAN};
         Cursor results = db.query(false, DBOpenHelper.TABLE_NAME, columns, null, null, null, null, null, null);
-        printCursor(results );
+        printCursor(results);
         results.moveToFirst();
 
         int idIndex = results.getColumnIndex(DBOpenHelper.COL_ID);
@@ -127,13 +130,17 @@ public class ChatActivity extends AppCompatActivity {
 
         String[] columns = cursor.getColumnNames();
         int numColumns = columns.length;
+        int idIndex = cursor.getColumnIndex(DBOpenHelper.COL_ID);
+        int messageIndex = cursor.getColumnIndex(DBOpenHelper.COL_MESSAGE);
+        int wasSentIndex = cursor.getColumnIndex(DBOpenHelper.COL_BOOLEAN);
+
 
         Log.e("CursorDebugStart", "\t*************************** Start Cursor Debug ***************************");
         Log.e("DB_Version", "\t\t|DB Version number: "+ DBOpenHelper.VERSION_NUMBER);
         Log.e("Column_Number", "\t|Column count: "+ cursor.getColumnCount());
 
          for(int i = 0; i < numColumns; i++){
-           Log.e("Column"+ (i+1), "\t\t\t|Column "+ (i+1) +columns[i]);
+           Log.e("Column"+ (i+1), "\t\t\t|Column "+ (i+1) +" "+ columns[i]);
         }
 
         Log.e("Result_Count", "\t\t|Result count: "+ cursor.getCount());
@@ -143,12 +150,12 @@ public class ChatActivity extends AppCompatActivity {
 
        while(cursor.moveToNext()){
 
-           if(cursor.getInt(1) == 0)
-            message = new Message(cursor.getString(1), false, cursor.getLong(0));
-           else if(cursor.getInt(1) == 1)
-               message = new Message(cursor.getString(1), true, cursor.getLong(0));
+           if(cursor.getInt(wasSentIndex) == 0)
+            message = new Message(cursor.getString(messageIndex), false, cursor.getLong(0));
+           else if(cursor.getInt(wasSentIndex) == 1)
+               message = new Message(cursor.getString(messageIndex), true, cursor.getLong(0));
 
-           Log.e("Result "+i++, "\t\t\t|Result "+ (i+1)+ ": Id = "+ message.getId() + " | wasSent = " + message.wasSent() + " | Message = " + message.getMessage());
+           Log.e("Result "+i++, "\t\t\t|Result "+ (i+1)+ ": Id = "+ message.getId() + " | wasSent = " + String.valueOf(message.wasSent()) + " | Message = " + message.getMessage());
        }
 
         Log.e("CursorDebugEnd", "\t*************************** End Cursor Debug ***************************");

@@ -5,6 +5,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/toolbar"
+        android:theme="@style/AppTheme"
+        />
+
     <TextView
         android:id="@+id/profileText1"
         android:layout_width="match_parent"
@@ -67,6 +74,12 @@
         android:layout_height="wrap_content"
         android:text="@string/Lab4_profile_chat_button"
         />
+
+    <Button
+        android:id="@+id/toolbarButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Toolbar_page_button"/>
 
 
 </LinearLayout>

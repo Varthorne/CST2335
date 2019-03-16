@@ -7,7 +7,10 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -23,6 +26,9 @@ public class ProfileActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_layout);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         EditText emailField = findViewById(R.id.profileEdit2);
         SharedPreferences sp = getSharedPreferences("Lab3Prefs", Context.MODE_PRIVATE);
@@ -44,7 +50,24 @@ public class ProfileActivity extends AppCompatActivity {
             startActivity(chatRoomPage);
         });
 
+        Button toolbarButton = findViewById(R.id.toolbarButton);
+        toolbarButton.setOnClickListener( e->{
+
+            Intent toolbarPage = new Intent(ProfileActivity.this, TestToolbar.class);
+
+            startActivity(toolbarPage);
+        });
+
         Log.e(ACTIVITY_NAME, "In function:" + "onCreate");
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+/*
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.mainToolbar, menu);
+*/
+        return true;
     }
 
     @Override

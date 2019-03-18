@@ -1,5 +1,49 @@
 <resources>
-    <string name="app_name">Lab 1</string>
+    <string name="app_name">Lab 7</string>
     <string name="hello_message">Hello World!</string>
     <string name="ButtonText">I\'m a button</string>
+
+    <!-- Lab 3 strings -->
+
+    <!-- Login page -->
+    <string name="Lab3_enter_email">Enter your email address: </string>
+    <string name="Lab3_type_email">Type email here</string>
+    <string name="Lab3_enter_password">Type your password: </string>
+    <string name="Lab3_login_button">Login</string>
+
+    <!-- Profile Page -->
+    <string name="Lab3_profile_text1_profile">Your profile</string>
+    <string name="Lab3_profile_text2_name">Your name:</string>
+    <string name="Lab3_profile_edit1_name">Enter your name</string>
+    <string name="Lab3_profile_text3_email">Your email:</string>
+    <string name="Lab3_profile_edit2_email">Enter your email</string>
+    <string name="Lab3_profile_text4_picture">Your picture:</string>
+    <string name="Lab3_profile_text5_takePicture">Click the button above to take a picture</string>
+    <string name="Lab4_profile_chat_button">Go to chat</string>
+    <string name="Toolbar_page_button">Go to Toolbar page</string>
+
+    <!-- Lab 4 strings -->
+
+    <!-- Chat Room Page -->
+    <string name="Lab4_chatSendButton">SEND</string>
+    <string name="Lab4_chatEditText">Type here</string>
+    <string name="Lab4_chatReceiveButton">RECEIVE</string>
+
+    <!-- Lab 6 -->
+    <string name="Lab6_snackBar">Go back?</string>
+    <string name="Lab6_snackBarButton">Go back</string>
+    <string name="Lab6_toastMessage">This is the initial message</string>
+    <string name="Lab6_dialog_textView">What is your new message?</string>
+    <string name="Lab6_dialog_editText">Type here</string>
+    <string name="Lab6_dialog_positive">Change</string>
+    <string name="Lab6_dialog_negative">Cancel</string>
+    <string name="Lab6_overflow">You clicked on the overflow menu</string>
+
+    <!-- Lab 7 -->
+    <string name="Lab7_weatherActivityButton">Go to weather forecast</string>
+    <string name="Lab7_currentTemp">Current Temperature: </string>
+    <string name="Lab7_minTemp">Mininum Temperature: </string>
+    <string name="Lab7_maxTemp">Maximum Temperature: </string>
+    <string name="Lab7_UVrating">UV rating: </string>
+
 </resources>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/lab6toolbar"
+    >
+    <item
+        app:showAsAction="always"
+        android:id="@+id/menuInfo"
+        android:icon="@drawable/info"
+        android:orderInCategory="100"
+        android:title="Info"
+        />
+
+    <item
+        app:showAsAction="always"
+        android:id="@+id/menuBubble"
+        android:icon="@drawable/bubble"
+        android:orderInCategory="200"
+        android:title="Insert Text"
+        />
+
+    <item
+        app:showAsAction="always"
+        android:id="@+id/menuExit"
+        android:icon="@drawable/exit"
+        android:orderInCategory="300"
+        android:title="Go Back"
+        />
+
+    <item
+        app:showAsAction="never"
+        android:id="@+id/menuDisplay"
+        android:orderInCategory="200"
+        android:title="Display message"
+        />
+
+</menu>

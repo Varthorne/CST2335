@@ -1,6 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Lab 1</string>
+    <string name="app_name">Lab 7</string>
     <string name="hello_message">Bonjour!</string>
     <string name="ButtonText">Je suis un bouton!</string>
+
+
+    <!-- Lab 3 strings -->
+
+        <!-- Login page -->
+        <string name="Lab3_enter_email">Tapez votre adresse courriel: </string>
+        <string name="Lab3_type_email">Tapez votre courriel ici</string>
+        <string name="Lab3_enter_password">Tapez votre mot de passe: </string>
+        <string name="Lab3_login_button">Connexion</string>
+
+        <!-- Profile Page -->
+        <string name="Lab3_profile_text1_profile">Votre profil</string>
+        <string name="Lab3_profile_text2_name">Votre nom:</string>
+        <string name="Lab3_profile_edit1_name">Entrez votre nom</string>
+        <string name="Lab3_profile_text3_email">Votre adresse courriel:</string>
+        <string name="Lab3_profile_edit2_email">Entrez votre courriel</string>
+        <string name="Lab3_profile_text4_picture">Votre photo:</string>
+        <string name="Lab3_profile_text5_takePicture">Appuyez sur le bouton ci-dessus pour prendre une photo</string>
+        <string name="Lab4_profile_chat_button">Aller au chat</string>
+        <string name="Toolbar_page_button">Aller à la page barre d\'outils</string>
+
+    <!-- Lab 4 strings -->
+
+        <!-- Chat Room Page -->
+        <string name="Lab4_chatSendButton">ENVOYER</string>
+        <string name="Lab4_chatEditText">Tapez ici</string>
+        <string name="Lab4_chatReceiveButton">RECEVOIR</string>
+
+    <!-- Lab 6 -->
+        <string name="Lab6_snackBar">Retourner?</string>
+        <string name="Lab6_snackBarButton">Retourner</string>
+        <string name="Lab6_toastMessage">Voici le message initial</string>
+        <string name="Lab6_dialog_textView">Quel est votre nouveau message?</string>
+        <string name="Lab6_dialog_editText">Taper ici</string>
+        <string name="Lab6_dialog_positive">Changer</string>
+        <string name="Lab6_dialog_negative">Annuler</string>
+        <string name="Lab6_overflow">Vous avez cliqué le menu à trop-plein</string>
+
+    <!-- Lab 7 -->
+        <string name="Lab7_weatherActivityButton">Aller aux prévisions météo</string>
+        <string name="Lab7_currentTemp">Température actuelle: </string>
+        <string name="Lab7_minTemp">Température minimale: </string>
+        <string name="Lab7_maxTemp">Température maximale: </string>
+        <string name="Lab7_UVrating">Index UV: </string>
+
 </resources>

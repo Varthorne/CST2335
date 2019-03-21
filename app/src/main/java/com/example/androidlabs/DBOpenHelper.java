@@ -9,7 +9,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 
 
     public static final String DATABASE_NAME = "DatabaseFile";
-    public static final int VERSION_NUMBER = 2;
+    public static final int VERSION_NUMBER = 3;
     public static final String TABLE_NAME = "Messages";
     public static final String COL_ID = "_id";
     public static final String COL_MESSAGE = "message";
@@ -53,4 +53,10 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         //Create a new table:
         onCreate(db);
     }
+
+    public void delete(SQLiteDatabase db, int id){
+
+        db.delete(TABLE_NAME, COL_ID+"=?", new String[]{Long.toString(id)});
+    }
+
 }

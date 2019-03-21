@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Lab 7</string>
+    <string name="app_name">Lab 8</string>
     <string name="hello_message">Hello World!</string>
     <string name="ButtonText">I\'m a button</string>
 
@@ -45,5 +45,10 @@
     <string name="Lab7_minTemp">Mininum Temperature: </string>
     <string name="Lab7_maxTemp">Maximum Temperature: </string>
     <string name="Lab7_UVrating">UV rating: </string>
+    
+    <!-- Lab 8 -->
+    <string name="Lab8_delete_button">Delete this message</string>
+    <string name="Lab8_id_message">ID=</string>
+    <string name="Lab8_message_type">Message Type=</string>
 
 </resources>

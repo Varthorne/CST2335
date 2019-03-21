@@ -1,6 +1,8 @@
 package com.example.androidlabs;
 
+import android.app.Activity;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -18,6 +20,14 @@ public class ChatActivity extends AppCompatActivity {
 
     private ListView chatWindow;
     private ArrayList<Message> messages;
+    private ChatAdapter adapter;
+    private DBOpenHelper dbOpener;
+    private SQLiteDatabase db;
+    public static final String ITEM = "ITEM";
+    public static final String ITEM_POSITION = "POSITION";
+    public static final String ITEM_ID = "ID";
+    public static final String ITEM_BOOLEAN = "TYPE";
+    public static final int MESSAGE_DETAIL_ACTIVITY = 300;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -25,24 +35,21 @@ public class ChatActivity extends AppCompatActivity {
         /* Standard method calls */
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chat_room_layout);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
         /* Initialize objects */
         messages = new ArrayList<>();
 
         chatWindow = findViewById(R.id.chatListView);
-
+        boolean isTablet = findViewById(R.id.frame_layout) != null;
 
         SwipeRefreshLayout refresher = findViewById(R.id.chatRefresher);
 
         Button sendButton = findViewById(R.id.chatSendButton);
         Button receiveButton = findViewById(R.id.chatReceiveButton);
 
-
         /* Retrieve database and load ListView messages */
-        DBOpenHelper dbOpener = new DBOpenHelper(this);
-        SQLiteDatabase db = dbOpener.getWritableDatabase();
+        dbOpener = new DBOpenHelper(this);
+        db = dbOpener.getWritableDatabase();
 
         String[] columns = {DBOpenHelper.COL_ID, DBOpenHelper.COL_MESSAGE, DBOpenHelper.COL_BOOLEAN};
         Cursor results = db.query(false, DBOpenHelper.TABLE_NAME, columns, null, null, null, null, null, null);
@@ -55,48 +62,61 @@ public class ChatActivity extends AppCompatActivity {
 
         do {
 
-            long id = results.getLong(idIndex);
-            String message = results.getString(messageIndex);
-            boolean wasSent = true;
+            if(!results.isAfterLast()) {
+                long id = results.getLong(idIndex);
+                String message = results.getString(messageIndex);
+                boolean wasSent = true;
 
-            if(results.getInt(booleanIndex) == 0)
-                wasSent = false;
+                if (results.getInt(booleanIndex) == 0)
+                    wasSent = false;
 
-            messages.add(new Message(message, wasSent, id));
+                messages.add(new Message(message, wasSent, id));
+            }
         } while(results.moveToNext());
 
 
-        ChatAdapter adapter = new ChatAdapter(messages, this);
+        adapter = new ChatAdapter(messages, this);
         chatWindow.setAdapter(adapter);
+
+        chatWindow.setOnItemClickListener((list, view, position, id) -> {
+
+            Bundle data = new Bundle();
+            data.putString(ITEM, messages.get(position).getMessage());
+            data.putInt(ITEM_POSITION, position);
+            data.putLong(ITEM_ID, id);
+            data.putBoolean(ITEM_BOOLEAN, messages.get(position).wasSent());
+
+            if(isTablet){
+
+
+            } else {
+
+                Intent messageDetail = new Intent(ChatActivity.this, MessageDetailActivity.class);
+                messageDetail.putExtras(data);
+                startActivityForResult(messageDetail, MESSAGE_DETAIL_ACTIVITY);
+            }
+
+        });
 
         /* Add Listeners */
         sendButton.setOnClickListener(e -> {
-
             EditText chatEditText = findViewById(R.id.chatEditText);
 
             if(!(chatEditText.getText().toString().equals(""))) {
 
                 Message message = new Message(chatEditText.getText().toString(), true);
-
                 createMessage(message, db);
-
                 adapter.notifyDataSetChanged();
                 chatEditText.setText("");
             }
         });
 
         receiveButton.setOnClickListener(e -> {
-
-
-
             EditText chatEditText = findViewById(R.id.chatEditText);
 
             if(!(chatEditText.getText().toString().equals(""))) {
-
                 Message message = new Message(chatEditText.getText().toString(), false);
-
                 createMessage(message, db);
-
                 adapter.notifyDataSetChanged();
                 chatEditText.setText("");
             }
@@ -107,6 +127,30 @@ public class ChatActivity extends AppCompatActivity {
             adapter.notifyDataSetChanged();
             refresher.setRefreshing(false);
         });
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if(requestCode == MESSAGE_DETAIL_ACTIVITY){
+
+            if(resultCode == Activity.RESULT_OK){
+
+               long id = data.getLongExtra(ITEM_ID, 0);
+               int position = data.getIntExtra(ITEM_POSITION, 0);
+               deleteMessage((int)id, position);
+            }
+
+        }
+    }
+
+    private void deleteMessage(int id, int position){
+
+        Log.i("Deleted message", "Message ID = "+ messages.get(position).getId());
+        messages.remove(position);
+        dbOpener.delete(db, id);
+        adapter.notifyDataSetChanged();
 
     }
 

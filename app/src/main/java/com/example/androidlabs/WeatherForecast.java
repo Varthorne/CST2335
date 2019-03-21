@@ -154,12 +154,14 @@ public class WeatherForecast extends AppCompatActivity {
 
                     try {
                         File file = getBaseContext().getFileStreamPath(icon);
+                        Log.i("File path is: ", file.getPath());
+
                         fis = new FileInputStream(file);
+                        weatherImage = BitmapFactory.decodeStream(fis);
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
-                    Bitmap bm = BitmapFactory.decodeStream(fis);
-                    weatherImage = bm;
+
 
                     Log.i("File exists", "Retrieved file: "+ icon);
                 }
@@ -186,6 +188,7 @@ public class WeatherForecast extends AppCompatActivity {
                 JSONObject uvData = new JSONObject(result);
 
                 uvRating = uvData.getString("value");
+                Log.i("UV Rating is: ", uvData.getString("value"));
 
             } catch (IOException | XmlPullParserException e) {
                 Log.e("Connection failed", e.getMessage());

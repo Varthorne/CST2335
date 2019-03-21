@@ -15,7 +15,7 @@ public class ChatAdapter extends BaseAdapter {
     private ArrayList<Message> messages;
     private Context context;
 
-    protected ChatAdapter(ArrayList array, Context context){
+    protected ChatAdapter(ArrayList<Message> array, Context context){
         this.messages = array;
         this.context = context;
     }

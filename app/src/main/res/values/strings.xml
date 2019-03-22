@@ -50,5 +50,7 @@
     <string name="Lab8_delete_button">Delete this message</string>
     <string name="Lab8_id_message">ID=</string>
     <string name="Lab8_message_type">Message Type=</string>
+    <string name="Lab8_message_type_Received">Received</string>
+    <string name="Lab8_message_type_Sent">Sent</string>
 
 </resources>

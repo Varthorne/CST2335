@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -15,6 +18,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ChatActivity extends AppCompatActivity {
 
@@ -88,6 +92,30 @@ public class ChatActivity extends AppCompatActivity {
 
             if(isTablet){
 
+                FragmentManager manager = getSupportFragmentManager();
+
+                if(manager.getBackStackEntryCount() >= 1){
+
+                    List<Fragment> fragments = manager.getFragments();
+                    FragmentTransaction trans = manager.beginTransaction();
+
+                    for(Fragment existingFragment: fragments) {
+                        Log.i("Removed Fragment", existingFragment.toString());
+                        trans.remove(existingFragment);
+                    }
+
+                    trans.commit();
+                }
+
+                MessageFragment fragment = new MessageFragment();
+                fragment.setArguments(data);
+                fragment.setTablet(true);
+
+                manager.beginTransaction()
+                        .add(R.id.frame_layout, fragment)
+                        .addToBackStack("Fragment")
+                        .commit();
+
 
             } else {
 
@@ -145,7 +173,7 @@ public class ChatActivity extends AppCompatActivity {
         }
     }
 
-    private void deleteMessage(int id, int position){
+    public void deleteMessage(int id, int position){
 
         Log.i("Deleted message", "Message ID = "+ messages.get(position).getId());
         messages.remove(position);

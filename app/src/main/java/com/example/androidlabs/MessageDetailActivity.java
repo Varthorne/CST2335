@@ -16,36 +16,19 @@ public class MessageDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.chat_room_message_detail);
 
-        data = getIntent().getExtras();
+        setContentView(R.layout.message_detail_activity_layout);
 
-        TextView messageContent = findViewById(R.id.textview_message);
-        messageContent.setText(data.getString(ChatActivity.ITEM));
+        Bundle data = getIntent().getExtras();
 
-        TextView messageID = findViewById(R.id.message_id);
-        messageID.setText(String.valueOf(data.getLong(ChatActivity.ITEM_ID)));
-
-        TextView messageType = findViewById(R.id.message_type);
-        boolean wasSent = data.getBoolean(ChatActivity.ITEM_BOOLEAN);
-
-        if(wasSent)
-            messageType.setText("Sent");
-        else
-            messageType.setText("Received");
-
-
-        Button deleteButton = findViewById(R.id.button_delete);
-        deleteButton.setOnClickListener(v -> {
-
-            Intent backToChat = new Intent(MessageDetailActivity.this, ChatActivity.class);
-            backToChat.putExtra(ChatActivity.ITEM_POSITION, data.getInt(ChatActivity.ITEM_POSITION));
-            backToChat.putExtra(ChatActivity.ITEM_ID, data.getLong(ChatActivity.ITEM_ID));
-            setResult(Activity.RESULT_OK, backToChat);
-
-            finish();
-        });
-
+        MessageFragment fragment = new MessageFragment();
+        fragment.setArguments(data);
+        fragment.setTablet(false);
+        getSupportFragmentManager()
+                .beginTransaction()
+                .add(R.id.frame_layout, fragment)
+                .addToBackStack("Fragment")
+                .commit();
 
     }
 

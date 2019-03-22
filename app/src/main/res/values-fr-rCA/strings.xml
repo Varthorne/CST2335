@@ -52,6 +52,7 @@
     <string name="Lab8_delete_button">Supprimmer ce message</string>
     <string name="Lab8_id_message">ID=</string>
     <string name="Lab8_message_type">Message Type=</string>
-
+    <string name="Lab8_message_type_Received">Reçu</string>
+    <string name="Lab8_message_type_Sent">Envoyé</string>
 
 </resources>

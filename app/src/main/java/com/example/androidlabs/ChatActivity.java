@@ -32,6 +32,7 @@ public class ChatActivity extends AppCompatActivity {
     public static final String ITEM_ID = "ID";
     public static final String ITEM_BOOLEAN = "TYPE";
     public static final int MESSAGE_DETAIL_ACTIVITY = 300;
+    public static final String FRAGMENT = "MessageDetailFragment";
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -94,26 +95,36 @@ public class ChatActivity extends AppCompatActivity {
 
                 FragmentManager manager = getSupportFragmentManager();
 
+                Fragment tempFragment = manager.findFragmentByTag(FRAGMENT);
+                manager.popBackStack();
+
+                if(tempFragment != null){
+
+                    manager.beginTransaction().remove(tempFragment).commit();
+                }
+
+                /*
                 if(manager.getBackStackEntryCount() >= 1){
+
+                    manager.popBackStack();
 
                     List<Fragment> fragments = manager.getFragments();
                     FragmentTransaction trans = manager.beginTransaction();
 
                     for(Fragment existingFragment: fragments) {
-                        Log.i("Removed Fragment", existingFragment.toString());
                         trans.remove(existingFragment);
                     }
 
                     trans.commit();
                 }
-
+*/
                 MessageFragment fragment = new MessageFragment();
                 fragment.setArguments(data);
                 fragment.setTablet(true);
 
                 manager.beginTransaction()
                         .add(R.id.frame_layout, fragment)
-                        .addToBackStack("Fragment")
+                        .addToBackStack(FRAGMENT)
                         .commit();
 
 
@@ -179,7 +190,6 @@ public class ChatActivity extends AppCompatActivity {
         messages.remove(position);
         dbOpener.delete(db, id);
         adapter.notifyDataSetChanged();
-
     }
 
     private void createMessage(Message message, SQLiteDatabase db){
